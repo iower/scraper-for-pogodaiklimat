@@ -14,13 +14,16 @@
 <script>
 	const datasets = []
 
-	for (let year = 2011; year <= 2020; year++) {
+	const yearFrom = 2011
+	const yearTo = 2020
+
+	for (let year = yearFrom; year <= 2020; year++) {
 		const points = data.filter(item => item[0].includes(year+'')).map(item => {
 			const [ time, date ] = item[0].split(' ')
 			const [ d, m, y ] = date.split('.')
 
 			return {
-				x: new Date(`${y}.${m}.${d} ${time}`),
+				x: new Date(`${2011}.${m}.${d} ${time}`),
 				y: item[6],
 			}
 		})
@@ -28,7 +31,7 @@
 		datasets.push({
 			label: year,
 			data: points,
-			borderColor: 'black'
+			borderColor: `hsl(${360 / (yearTo - yearFrom) * (year - yearFrom)},50%,50%)`
 		})
 	}
 
